@@ -6,6 +6,7 @@ mod factory_reset;
 mod mod_test;
 mod network_status;
 mod ssh;
+mod ssh_tunnel;
 use crate::Message;
 use anyhow::{Context, Result};
 use azure_iot_sdk::client::*;
@@ -115,6 +116,7 @@ pub enum ReportProperty<'a> {
     FactoryResetResult,
     NetworkStatus,
     SshStatus,
+    SshTunnelStatus,
 }
 
 impl Twin {
@@ -160,6 +162,11 @@ impl Twin {
             ReportProperty::SshStatus => self
                 .report_ssh_status()
                 .context("Couldn't report ssh status"),
+            ReportProperty::SshTunnelStatus => {
+                log::debug!("Reporting SSH Tunnel Status");
+                self.report_ssh_tunnel_status()
+                    .context("Couldn't report ssh tunnel status")
+            }
         }
     }
 
