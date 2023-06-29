@@ -89,6 +89,10 @@ impl TwinInstance {
             IotHubClient::make_direct_method(ssh::close_ssh),
         );
 
+        methods.insert(
+            String::from("get_ssh_pub_key"),
+            IotHubClient::make_direct_method(ssh_tunnel::get_ssh_pub_key),
+        );
         Some(methods)
     }
 
