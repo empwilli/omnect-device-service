@@ -90,9 +90,22 @@ impl TwinInstance {
         );
 
         methods.insert(
+            String::from("refresh_ssh_tunnel_status"),
+            IotHubClient::make_direct_method(ssh_tunnel::refresh_ssh_tunnel_status),
+        );
+        methods.insert(
             String::from("get_ssh_pub_key"),
             IotHubClient::make_direct_method(ssh_tunnel::get_ssh_pub_key),
         );
+        methods.insert(
+            String::from("open_ssh_tunnel"),
+            IotHubClient::make_direct_method(ssh_tunnel::open_ssh_tunnel),
+        );
+        methods.insert(
+            String::from("close_ssh_tunnel"),
+            IotHubClient::make_direct_method(ssh_tunnel::close_ssh_tunnel),
+        );
+
         Some(methods)
     }
 

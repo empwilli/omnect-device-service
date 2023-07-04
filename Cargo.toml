@@ -16,6 +16,7 @@ azure-iot-sdk = { git = "ssh://git@github.com/omnect/azure-iot-sdk.git", tag = "
     "module_client",
 ] }
 env_logger = "0.8"
+futures = "0.3.28"
 futures-executor = "0.3"
 futures-util = "0.3"
 iptables = "0.5"
@@ -34,8 +35,10 @@ systemd-zbus = "0.1"
 # ToDo: set to 0.3 once we support rust 1.63
 time = { version = "=0.3.19", features = ["formatting"] }
 tokio = "1"
+uuid = "1.4.0"
 zbus = { version = "3", default-features = false, features = ["tokio"] }
 
 [dev-dependencies]
 cp_r = "0.5"
 stdext = "0.3"
+tempfile = "3.6.0"

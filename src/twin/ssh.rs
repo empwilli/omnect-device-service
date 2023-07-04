@@ -12,6 +12,7 @@ static SSH_RULE: &str = "-p tcp -m tcp --dport 22 -m state --state NEW -j ACCEPT
 
 pub fn write_authorized_keys(pubkey: &str) -> Result<()> {
     let mut child = Command::new("sudo")
+        .arg("-n")
         .args(["-u", "omnect", "tee", AUTHORIZED_KEYS_PATH])
         .stdin(Stdio::piped())
         .stdout(Stdio::null())
