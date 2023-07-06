@@ -48,6 +48,7 @@ pub fn reset_to_factory_settings(in_json: serde_json::Value) -> Result<Option<se
         Some(reset_type) => {
             anyhow::ensure!(
                 Command::new("sudo")
+                    .arg("-n")
                     .arg("fw_setenv")
                     .arg("factory-reset-restore-list")
                     .arg(restore_paths)
@@ -58,6 +59,7 @@ pub fn reset_to_factory_settings(in_json: serde_json::Value) -> Result<Option<se
 
             anyhow::ensure!(
                 Command::new("sudo")
+                    .arg("-n")
                     .arg("fw_setenv")
                     .arg("factory-reset")
                     .arg(reset_type.to_string())
@@ -90,6 +92,7 @@ impl Twin {
 
     pub fn report_factory_reset_result(&mut self) -> Result<()> {
         if let Ok(output) = Command::new("sudo")
+            .arg("-n")
             .arg("fw_printenv")
             .arg("factory-reset-status")
             .output()
@@ -121,6 +124,7 @@ impl Twin {
                     self.report_factory_reset_status(update_twin)?;
                     anyhow::ensure!(
                         Command::new("sudo")
+                            .arg("-n")
                             .arg("fw_setenv")
                             .arg("factory-reset-status")
                             .status()?

@@ -37,6 +37,7 @@ async fn validate() -> Result<()> {
 
 async fn finalize() -> Result<()> {
     let omnect_validate_update_part = Command::new("sudo")
+        .arg("-n")
         .arg("fw_printenv")
         .arg("omnect_validate_update_part")
         .output()?;
@@ -51,6 +52,7 @@ async fn finalize() -> Result<()> {
 
     anyhow::ensure!(
         Command::new("sudo")
+            .arg("-n")
             .args(["fw_setenv", "bootpart", omnect_validate_update_part])
             .status()?
             .success(),
@@ -59,6 +61,7 @@ async fn finalize() -> Result<()> {
 
     anyhow::ensure!(
         Command::new("sudo")
+            .arg("-n")
             .arg("fw_setenv")
             .arg("omnect_validate_update")
             .status()?
@@ -68,6 +71,7 @@ async fn finalize() -> Result<()> {
 
     anyhow::ensure!(
         Command::new("sudo")
+            .arg("-n")
             .arg("fw_setenv")
             .arg("omnect_validate_update_part")
             .status()?

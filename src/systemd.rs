@@ -67,6 +67,7 @@ pub async fn reboot() -> Result<()> {
     info!("systemd::reboot");
     //journalctl seems not to have a dbus api
     let _ = Command::new("sudo")
+        .arg("-n")
         .arg("journalctl")
         .arg("--sync")
         .status();
