@@ -6,6 +6,7 @@ use anyhow::{Context, Result};
 use azure_iot_sdk::client::*;
 use client::{Client, Message};
 use futures_executor::block_on;
+use lazy_static::lazy_static;
 use log::error;
 use notify::RecursiveMode;
 use notify_debouncer_mini::new_debouncer;
@@ -24,6 +25,10 @@ macro_rules! consent_path {
         static CONSENT_DIR_PATH_DEFAULT: &'static str = "/etc/omnect/consent";
         std::env::var("CONSENT_DIR_PATH").unwrap_or(CONSENT_DIR_PATH_DEFAULT.to_string())
     }};
+}
+
+lazy_static! {
+    static ref DEVICE_STRING: String = std::env::var("DEVICE_STRING").expect("Missing DEVICE_STRING environment variable.");
 }
 
 const WATCHER_DELAY: u64 = 2;
@@ -69,7 +74,7 @@ pub async fn run() -> Result<()> {
         .context("debouncer history_consent_path")?;
 
     client.run(
-        None,
+        Some(&*DEVICE_STRING),
         twin.get_direct_methods(),
         tx_client2app,
         rx_app2client,
