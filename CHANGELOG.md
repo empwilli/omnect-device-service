@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] Q3 2023
+ - ssh tunnel: added ssh tunnel feature. The feature provides remote access to the device across a reverse ssh tunnel.
+
 ## [0.10.4] Q1 2023
  - systemd::start_unit: added timeout handling
  - systemd::wait_for_system_running: added timeout handling
